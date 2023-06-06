@@ -10,8 +10,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.bookcollections.R;
-import com.example.bookcollections.ui.addfavor.searchResult.SearchResultFragment;
-import com.example.bookcollections.ui.book.Book;
 import com.example.bookcollections.ui.book.BookFragment;
 
 

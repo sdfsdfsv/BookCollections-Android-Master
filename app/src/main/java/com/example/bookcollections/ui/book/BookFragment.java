@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.bookcollections.R;
+import com.example.bookcollections.model.Book;
 
 import java.util.ArrayList;
 import java.util.List;

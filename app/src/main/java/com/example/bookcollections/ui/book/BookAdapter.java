@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bookcollections.R;
+import com.example.bookcollections.model.Book;
+import com.example.bookcollections.model.User;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -55,6 +58,8 @@ public class BookAdapter extends BaseAdapter {
         TextView bookTitle = convertView.findViewById(R.id.book_title);
         TextView bookAuthor = convertView.findViewById(R.id.book_author);
         TextView publishDate = convertView.findViewById(R.id.publish_date);
+        Button favoriteBtn = convertView.findViewById(R.id.btn_favor);
+        Button readBtn = convertView.findViewById(R.id.btn_read);
 
 
         URL url = null;
@@ -66,6 +71,13 @@ public class BookAdapter extends BaseAdapter {
             e.printStackTrace();
         }
 
+        favoriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User.getCurrentUser().AddFavorite(book);
+            }
+
+        });
 
         bookTitle.setText(book.getTitle());
         bookAuthor.setText(book.getAuthor());
@@ -73,6 +85,7 @@ public class BookAdapter extends BaseAdapter {
 
         return convertView;
     }
+
 
     private void requestImage(final URL imgUrl, final ImageView image) {
 
@@ -82,7 +95,7 @@ public class BookAdapter extends BaseAdapter {
             image.setImageBitmap(bitmap);
         } catch (Exception e) {
             image.setImageResource(R.drawable.default_image);
-            Log.d(this.getClass().getSimpleName(),"cannot down");
+            Log.d(this.getClass().getSimpleName(), "cannot down");
         }
 
     }

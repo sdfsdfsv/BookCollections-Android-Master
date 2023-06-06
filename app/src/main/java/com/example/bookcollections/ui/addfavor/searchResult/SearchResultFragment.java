@@ -1,23 +1,15 @@
 package com.example.bookcollections.ui.addfavor.searchResult;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.bookcollections.R;
-import com.example.bookcollections.databinding.FragmentAddfavorBinding;
-import com.example.bookcollections.ui.addfavor.searchResult.SearchResultFragment;
-import com.example.bookcollections.ui.book.Book;
+import com.example.bookcollections.model.Book;
 import com.example.bookcollections.ui.book.BookAdapter;
 
 import android.widget.GridView;
