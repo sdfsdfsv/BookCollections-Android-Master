@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">bookCollections</string>
+
+    <string name="title_addFavor">AddFavor</string>
+    <string name="title_books">Books</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="search_input_content_description">Input your query</string>
+
+</resources>
