@@ -1,6 +1,9 @@
 package com.example.bookcollections.ui.book;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,8 @@ import android.widget.TextView;
 
 import com.example.bookcollections.R;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 public class BookAdapter extends BaseAdapter {
@@ -21,6 +26,7 @@ public class BookAdapter extends BaseAdapter {
         this.context = context;
         this.books = books;
     }
+
 
     @Override
     public int getCount() {
@@ -50,11 +56,35 @@ public class BookAdapter extends BaseAdapter {
         TextView bookAuthor = convertView.findViewById(R.id.book_author);
         TextView publishDate = convertView.findViewById(R.id.publish_date);
 
-        bookCover.setImageDrawable(book.getImage());
+
+        URL url = null;
+
+        try {
+            url = new URL(book.getImage());
+            requestImage(url, bookCover);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+
         bookTitle.setText(book.getTitle());
         bookAuthor.setText(book.getAuthor());
         publishDate.setText(book.getPublishedDate());
 
         return convertView;
     }
+
+    private void requestImage(final URL imgUrl, final ImageView image) {
+
+        Bitmap bitmap = null;
+        try {
+            bitmap = BitmapFactory.decodeStream(imgUrl.openStream());
+            image.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            image.setImageResource(R.drawable.default_image);
+            Log.d(this.getClass().getSimpleName(),"cannot down");
+        }
+
+    }
+
 }

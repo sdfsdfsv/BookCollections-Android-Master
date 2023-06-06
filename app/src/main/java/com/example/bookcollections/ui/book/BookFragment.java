@@ -20,24 +20,44 @@ public class BookFragment extends Fragment {
     private GridView gridView;
     private BookAdapter bookAdapter;
 
+    public static BookFragment setInstance(String query) {
+        BookFragment bookFragment = new BookFragment();
+        Bundle args = new Bundle();
+        args.putString("query", query);
+        bookFragment.setArguments(args);
+        return bookFragment;
+    }
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_books, container, false);
         gridView = root.findViewById(R.id.grid_view);
 
-        // Create a list of books
-        // Create a list of books
-        List<Book> books = new ArrayList<>();
-        books.add(new Book("The Great Gatsby", "F. Scott Fitzgerald", ContextCompat.getDrawable(getContext(), R.drawable.book)));
-        books.add(new Book("To Kill a Mockingbird", "Harper Lee", ContextCompat.getDrawable(getContext(), R.drawable.book)));
-        books.add(new Book("1984", "George Orwell", ContextCompat.getDrawable(getContext(), R.drawable.book)));
-        books.add(new Book("Pride and Prejudice", "Jane Austen", ContextCompat.getDrawable(getContext(), R.drawable.book)));
-        books.add(new Book("The Catcher in the Rye", "J.D. Salinger", ContextCompat.getDrawable(getContext(), R.drawable.book)));
+        try {
 
-// Create a book adapter to display the book images in the grid view
-        bookAdapter = new BookAdapter(getContext(), books);
-        gridView.setAdapter(bookAdapter);
 
-        return root;
+            String query = getArguments().getString("query");
+            List<Book> searchResults = new ArrayList<>();
+            for (Book book : Book.BookExamples) {
+                if (book.getTitle().toLowerCase().contains(query.toLowerCase())) {
+                    searchResults.add(book);
+                }
+            }
+
+            // Create a book adapter to display the search results in the grid view
+            bookAdapter = new BookAdapter(getContext(), searchResults);
+            gridView.setAdapter(bookAdapter);
+            return root;
+
+        } catch (NullPointerException e) {
+
+            bookAdapter = new BookAdapter(getContext(), Book.BookExamples);
+            gridView.setAdapter(bookAdapter);
+            return root;
+        }
+
+        // Filter the book examples based on the search query
+
     }
 }

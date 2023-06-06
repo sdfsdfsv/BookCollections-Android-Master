@@ -1,19 +1,23 @@
 package com.example.bookcollections.ui.addfavor;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+
 public class AddfavorViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private MutableLiveData<String> query;
 
     public AddfavorViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        query = new MutableLiveData<>();
+        query.setValue("Enter your search query here");
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public MutableLiveData<String> getText() {
+        return query;
+    }
+
+    public void setText(String text) {
+        query.setValue(text);
     }
 }

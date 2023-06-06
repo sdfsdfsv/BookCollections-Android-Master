@@ -9,7 +9,11 @@
         android:id="@+id/navigation_addfavor"
         android:name="com.example.bookcollections.ui.addfavor.AddfavorFragment"
         android:label="@string/title_addFavor"
-        tools:layout="@layout/fragment_addfavor" />
+        tools:layout="@layout/fragment_addfavor" >
+        <action
+            android:id="@+id/action_navigation_addfavor_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorites"
@@ -22,5 +26,15 @@
         android:name="com.example.bookcollections.ui.book.BookFragment"
         android:label="@string/title_books"
         tools:layout="@layout/fragment_books" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.bookcollections.ui.addfavor.searchResult.SearchResultFragment"
+        android:label="fragment_searchresult"
+        tools:layout="@layout/fragment_searchresult" >
+        <action
+            android:id="@+id/action_searchResultFragment_to_navigation_addfavor"
+            app:destination="@id/navigation_addfavor" />
+    </fragment>
+
 
 </navigation>
