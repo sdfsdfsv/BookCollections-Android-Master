@@ -1,55 +1,88 @@
 package com.example.bookcollections;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
 
 
-import com.example.bookcollections.databinding.ActivityMainBinding;
 import com.example.bookcollections.model.User;
+import com.example.bookcollections.ui.addfavor.AddfavorActivity;
+import com.example.bookcollections.ui.book.BookActivity;
+import com.example.bookcollections.ui.favorites.FavoritesActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
-        Log.d(TAG, "Start creating ");
-
-        super.onCreate(savedInstanceState);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
         new User();
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_addfavor, R.id.navigation_favorites, R.id.navigation_books)
-                .build();
-        Log.d(TAG, "onCreate: finished appbar config");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        Log.d(TAG, "onCreate: find nav controller");
+        bottomNavigationView = findViewById(R.id.bottom_nav_view);
 
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        Log.d(TAG, "onCreate: set up action bar");
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-        NavigationUI.setupWithNavController(binding.navView, navController);
-        Log.d(TAG, "onCreate: set up nav controller");
+                int itemId = menuItem.getItemId();
+                if (itemId == R.id.navigation_addfavor) {
+                    Intent intent = new Intent(getApplicationContext(), AddfavorActivity.class);
 
-        Log.d(TAG, "finished creating app");
+                    startActivity(intent);
+
+//                    new NavController(getApplicationContext()).navigate(R.id.navigation_books);
+                    // Handle Home click
+
+//                   bottomNavigationView.setSelectedItemId(R.id.navigation_addfavor);
+                    return true;
+                } else if (itemId == R.id.navigation_favorites) {
+
+                    Intent intent = new Intent(getApplicationContext(), FavoritesActivity.class);
+
+                    startActivity(intent);
+
+//                    new NavController(getApplicationContext()).navigate(R.id.navigation_books);
+                    // Handle Dashboard click
+
+//                   bottomNavigationView.setSelectedItemId(R.id.navigation_favorites);
+                    return true;
+                } else if (itemId == R.id.navigation_books) {
+
+                    Intent intent = new Intent(getApplicationContext(), BookActivity.class);
+
+                    startActivity(intent);
+                    // Handle Notifications click
+
+
+//                    new NavController(getApplicationContext()).navigate(R.id.navigation_books);
+                    // Your code goes here
+
+//                   bottomNavigationView.setSelectedItemId(R.id.navigation_books);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
     }
+
+    protected void setNavigationVisibility(boolean visible) {
+        bottomNavigationView.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
 
 }

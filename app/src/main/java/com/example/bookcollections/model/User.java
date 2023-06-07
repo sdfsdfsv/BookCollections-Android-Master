@@ -9,7 +9,7 @@ public class User {
 
 
 
-    private static HashSet<Book> favorites = new HashSet<>();
+    private static final HashSet<Book> favorites = new HashSet<>();
 
     private static User currentUser;
 

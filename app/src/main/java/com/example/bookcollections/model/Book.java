@@ -3,9 +3,11 @@ package com.example.bookcollections.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class Book {
 
+    private static int num=0;
 
     public static List<Book> BookExamples = Arrays.asList(
             new Book("The Great Gatsby", "F. Scott Fitzgerald",
@@ -41,17 +43,26 @@ public class Book {
     );
 
 
-    private String title;
-    private String author;
-    private String image;
-    private String publishedDate;
 
+    private final int uid;
+    private final String title;
+    private final String author;
+    private final String image;
+    private final String publishedDate;
+
+
+    public int Uid(){
+
+        return uid;
+    }
 
     public Book(String title, String author, String image) {
         this.title = title;
         this.author = author;
         this.image = image;
         this.publishedDate = "1970/1/1";
+        this.uid=Book.num++;
+
     }
 
     public Book(String title, String author, String image, String publishedDate) {
@@ -59,6 +70,7 @@ public class Book {
         this.author = author;
         this.image = image;
         this.publishedDate = publishedDate;
+        this.uid=Book.num++;
     }
 
     public String getTitle() {

@@ -3,7 +3,6 @@ package com.example.bookcollections.ui.book;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,13 @@ import com.example.bookcollections.R;
 import com.example.bookcollections.model.Book;
 import com.example.bookcollections.model.User;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
 public class BookAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<Book> books;
+    private final Context context;
+    private final List<Book> books;
 
     public BookAdapter(Context context, List<Book> books) {
         this.context = context;
@@ -49,7 +47,7 @@ public class BookAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.fragment_book, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.activity_book, parent, false);
         }
 
         Book book = books.get(position);
@@ -67,8 +65,26 @@ public class BookAdapter extends BaseAdapter {
         try {
             url = new URL(book.getImage());
             requestImage(url, bookCover);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Integer[] imageArray = {
+                    R.drawable.image1,
+                    R.drawable.image2,
+                    R.drawable.image3,
+                    R.drawable.image4,
+                    R.drawable.image5,
+                    R.drawable.image6,
+                    R.drawable.image7,
+                    R.drawable.image8,
+                    R.drawable.image9,
+                    R.drawable.image10,
+                    R.drawable.image11,
+                    R.drawable.image12,
+                    R.drawable.image13,
+                    R.drawable.image14,
+                    R.drawable.image15
+            };
+            bookCover.setImageResource(imageArray[book.Uid()]);
+
         }
 
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
@@ -87,16 +103,13 @@ public class BookAdapter extends BaseAdapter {
     }
 
 
-    private void requestImage(final URL imgUrl, final ImageView image) {
+    private void requestImage(final URL imgUrl, final ImageView image) throws Exception {
 
         Bitmap bitmap = null;
-        try {
-            bitmap = BitmapFactory.decodeStream(imgUrl.openStream());
-            image.setImageBitmap(bitmap);
-        } catch (Exception e) {
-            image.setImageResource(R.drawable.default_image);
-            Log.d(this.getClass().getSimpleName(), "cannot down");
-        }
+
+        bitmap = BitmapFactory.decodeStream(imgUrl.openStream());
+        image.setImageBitmap(bitmap);
+
 
     }
 

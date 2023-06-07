@@ -24,6 +24,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+         <activity
+            android:name=".ui.addfavor.AddfavorActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.favorites.FavoritesActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.book.BookActivity"
+            android:exported="false"/>
+
     </application>
 
 </manifest>
