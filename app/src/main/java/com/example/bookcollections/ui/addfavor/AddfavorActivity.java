@@ -28,7 +28,6 @@ public class AddfavorActivity extends MainActivity {
 
         LayoutInflater.from(this).inflate(R.layout.activity_addfavor, findViewById(R.id.container), true);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
 
         // Initialize the search button
         Button searchButton = findViewById(R.id.search_button);

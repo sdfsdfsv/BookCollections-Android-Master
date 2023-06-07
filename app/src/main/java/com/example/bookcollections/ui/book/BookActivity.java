@@ -33,8 +33,6 @@ public class BookActivity extends MainActivity {
 
          LayoutInflater.from(this).inflate(R.layout.activity_books, findViewById(R.id.container), true);
 
- BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_addfavor);
 
         gridView = (GridView) findViewById(R.id.grid_view);
 
