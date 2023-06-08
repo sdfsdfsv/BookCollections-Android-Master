@@ -58,7 +58,13 @@ public class BookAdapter extends BaseAdapter {
         TextView publishDate = convertView.findViewById(R.id.publish_date);
         Button favoriteBtn = convertView.findViewById(R.id.btn_favor);
         Button readBtn = convertView.findViewById(R.id.btn_read);
+        if (User.getCurrentUser().InFavorite(book)) {
 
+            favoriteBtn.setText("unfavor");
+        } else {
+
+            favoriteBtn.setText("favor");
+        }
 
         URL url = null;
 
@@ -90,7 +96,14 @@ public class BookAdapter extends BaseAdapter {
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User.getCurrentUser().AddFavorite(book);
+
+                if (User.getCurrentUser().InFavorite(book)) {
+                    User.getCurrentUser().DelFavorite(book);
+                    favoriteBtn.setText("favor");
+                } else {
+                    User.getCurrentUser().AddFavorite(book);
+                    favoriteBtn.setText("unfavor");
+                }
             }
 
         });

@@ -40,6 +40,12 @@ public class User {
 
     }
 
+    public boolean InFavorite(Book book){
+
+        return favorites.contains(book);
+
+    }
+
     public void ClearFavorite(){
 
         favorites.clear();
